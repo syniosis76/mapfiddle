@@ -1,9 +1,12 @@
-import flask
-from server import app
+from server import api
+import json
 
 name = 'Spatial Convert Service'
 version = '0.1.1.1'
 
-@app.route('/about')
-def about():    
-    return flask.jsonify(**{ 'name': name, 'version': version })
+class about:
+    def on_get(self, req, resp):
+        data = { "name": name, "version": version }
+        resp.body = json.dumps(data)
+
+api.add_route('/about', about())

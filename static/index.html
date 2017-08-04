@@ -23,7 +23,7 @@ function initialize() {
   // Load the data.
   data = new google.maps.Data();
   data.setStyle({fillColor: 'maroon', strokeColor: 'red', strokeWeight: 2});
-  data.loadGeoJson('http://localhost:5000/data/bridge');
+  data.loadGeoJson('/data/bridge');
     
   // Prepare a click event to show the tooltip.
   infoWindow = new google.maps.InfoWindow({ content: "" });

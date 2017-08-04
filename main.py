@@ -1,6 +1,7 @@
-from server import app
+from server import api
 import about
+import static
 import mapservice
+from waitress import serve
 
-if __name__ == '__main__':
-    app.run()
+serve(api, listen='*:8000')
