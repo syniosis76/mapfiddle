@@ -10,7 +10,7 @@ class static:
         path = 'static/' + filename
         resp.status = falcon.HTTP_200
         resp.content_type = self.get_content_type(filename)
-        resp.stream = open(path, 'r')
+        resp.stream = open(path, 'rb')
 
 api.add_route('/static/{filename}', static())
 

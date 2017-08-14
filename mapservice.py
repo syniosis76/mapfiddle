@@ -1,12 +1,11 @@
 from server import api
 import json
-import layer
+from layer import *
 import uuid
-from osgeo import ogr
+
+import falcon
    
-layers = layer.layers()
-layers.add(uuid.UUID('02d427a6-fc61-40f1-8ec8-65e97d6803f3'), 'home', 'point (-36.69405,174.7309471)')
-layers.add(uuid.UUID('201755ee-e5d9-4137-b76a-903e1a81ebe9'), 'work', 'point (-36.73767,174.7214429)')
+layers = map_layers()
 
 class test:
     def on_get(self, req, resp):
@@ -25,13 +24,15 @@ api.add_route('/data/test', test())
 
 class bridge:
     def on_get(self, req, resp):
-        driver = ogr.GetDriverByName('SQLite')
-        dataSource = driver.Open('data\\Bridge-WGS84.sqlite', 0)
-        layer = dataSource.GetLayer()
-
-        features = map(lambda feature: feature.ExportToJson(), layer)
-
-        resp.body = '{ "type": "FeatureCollection", "features": [ ' + ','.join(features) + ' ] }'
+        layer = layers.get_layer_by_name('bridge')
+        if layer is None:
+            layer = map_layer(uuid.uuid4(), 'bridge')
+            layer.load_sqlite_file('data\\Bridge-WGS84.sqlite')
+            layers.add(layer)
+                    
+        resp.status = falcon.HTTP_200
+        resp.content_type = "application/json"        
+        resp.stream = layer.get_geojson_stream()
 
 api.add_route('/data/bridge', bridge()) 
     

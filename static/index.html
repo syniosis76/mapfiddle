@@ -11,7 +11,8 @@
         padding: 0px
       }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script src="/static/oboe-browser.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>    
     <script>
 var map;
 
@@ -22,8 +23,7 @@ function initialize() {
 
   // Load the data.
   data = new google.maps.Data();
-  data.setStyle({fillColor: 'maroon', strokeColor: 'red', strokeWeight: 2});
-  data.loadGeoJson('/data/bridge');
+  data.setStyle({fillColor: 'maroon', strokeColor: 'red', strokeWeight: 2});  
     
   // Prepare a click event to show the tooltip.
   infoWindow = new google.maps.InfoWindow({ content: "" });
@@ -31,6 +31,18 @@ function initialize() {
 	
   // Display the data on the map  
   data.setMap(map);
+
+  //data.loadGeoJson('/data/bridge')
+  oboe('/data/bridge')
+    .node('features.*', function(feature)
+    {    
+      console.log('Got feature');
+      data.addGeoJson(feature);
+    })
+    .done(function(features)
+    {
+      console.log('Loaded', features.length, 'features'); 
+   });
 }
 
 function featureClick(event) {
