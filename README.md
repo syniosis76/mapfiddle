@@ -16,7 +16,7 @@ mapfiddle allows you to load geospatial data and view and convert int into vario
        pip install waitress
     4. gdal  
        https://pcjericks.github.io/py-gdalogr-cookbook/  
-       http://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal		 
+       http://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal  		 
        GDAL-2.1.4-cp36-cp36m-win_amd64.whl or newer
 2. Run using Visual Studio Code
     1. You need the Python Plugin  
