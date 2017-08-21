@@ -3,6 +3,10 @@ import falcon
 
 class static:
     def get_content_type(self, filename):        
+        if filename.endswith('.css'):
+            return 'text/css'
+        elif filename.endswith('.js'):
+            return 'application/javascript'
         return 'text/html'
 
     def on_get(self, req, resp, filename):
