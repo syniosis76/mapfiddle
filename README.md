@@ -21,12 +21,12 @@ mapfiddle allows you to load geospatial data and view and convert int into vario
 2. Run using Visual Studio Code
     1. You need the Python Plugin  
        https://marketplace.visualstudio.com/items?itemName=donjayamanne.python
-    2. Open the root folder in Visual Studio Code
+    2. Open the mapfiddle folder in Visual Studio Code
     3. Press F5 to run.
     4. Browse to http://localhost:8000
 3. Run on the Command Line
     1. Start a windows command window.
-    2. Change to the root folder.
+    2. Change to the mapfiddle folder.
     3. Run:  
        python main.py
     4. Browse to http://localhost:8000
